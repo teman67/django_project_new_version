@@ -13,7 +13,14 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
-    
+
+    class Meta:
+        ordering = ["create_on",'author']
+
+    def __str__(self):
+        return f"{self.title} is writen by {self.author}"
+
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
@@ -21,4 +28,11 @@ class Comment(models.Model):
     body = models.TextField()
     create_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
+
+    class Meta:
+        ordering=['create_on']
+
+    def __str__(self):
+        return f"Comment {self.body} by {self.author}"
+
 
