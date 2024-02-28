@@ -28,6 +28,7 @@ class Comment(models.Model):
     body = models.TextField()
     create_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
+    challenge = models.FloatField(default=3.0)
 
     class Meta:
         ordering=['create_on']
